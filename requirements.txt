@@ -1,0 +1,5 @@
+# Python packages used by R/01_pool_application.py, R/exp2_pool.py, R/exp2_summary.py,
+# R/05_bootstrap.py, R/06_inference.py and scripts/*.py (Python 3.13.15);
+# scripts/extract_published_tables.py also needs PyMuPDF
+numpy==2.4.4
+scipy==1.17.1

@@ -1,0 +1,39 @@
+sim/tests/run_tests.R  2026-10-16 19:13:20
+R version 4.5.1 (2025-06-13 ucrt) | AlphaSimR 2.1.0 | rrBLUP 4.6.3 | x86_64-w64-mingw32 | OMP_NUM_THREADS=1
+
+[PASS] configuration: Table 1 sets validate, bad sets are rejected (0.0 s)
+        application, exp1, exp2, test and accounting configurations valid; 5 invalid variants rejected
+[PASS] training archive keeps the latest records; ridge model predicts (0.1 s)
+        accuracy 0.996; effect of monomorphic marker -1.0e-14
+[PASS] admission rule, equation (6): threshold, cap, largest first (0.0 s)
+[PASS] founders: locus, cull, disjoint sets, scale, residual variance, save/reload (12.2 s)
+        built in 12 s: locus 2_26, 1 redraws, cull elite 48.0% donor 0.0%, max freq diff 0.730
+        varE 2.3333 (internal), base 14.62 t/ha, donor 14.55 t/ha, file 28 kB
+[PASS] Mendelian segregation at the endosperm locus (selfed donor x elite F1) (0.2 s)
+        10 F1 families x 1,000 F2: dosage 0/1/2 = 2471/5054/2475, sweet 0.2475, chi-square p = 0.557
+[PASS] tiny replicate: all arms and scenarios run; elite pool always sweet (1.2 s)
+        104 records in 1.2 s
+[PASS] ELITE2M identities: all-zero schedule = CLOSED, all-twos schedule = ELITE2 (0.2 s)
+        exact equality (identical()) of every genetic column over 4 cycles; replay checked in 6 arm-scenarios
+[PASS] paired start: arms share cycle-1 training sample and parents; streams part at step 4 (inflow) or 6 (elite) (0.2 s)
+        training sample, parents and generator state identical at step 4 of cycle 1 in all five arms
+[PASS] visual sorting is genetically identical to field discard; resource matching leaves CLOSED and ELITE2 unchanged (0.2 s)
+        all 19 genetic columns identical, for every arm
+[PASS] a programme run from a saved founder object is identical in a new R session (3.7 s)
+        104 records; SHA-256 of the three CSVs bf65fc997ac09db9
+[PASS] plot accounting at the application's programme sizes (all scenarios, 2 cycles) (41.5 s)
+        accounting founders + replicate in 41 s
+        baseline         BRIDGE 2400, CLOSED 600, DIRECT 1500, ELITE2 600, MAS 1512
+        resource_matched BRIDGE 696, CLOSED 600, DIRECT 698, ELITE2 600, MAS 692
+        visual_sort      BRIDGE 1721, CLOSED 600, DIRECT 826, ELITE2 600, MAS 1512
+        visual_matched   BRIDGE 626, CLOSED 600, DIRECT 554, ELITE2 600, MAS 692
+[PASS] recovery of sweet homozygotes: 1/4 for DIRECT and MAS F2, 0.625 for BRIDGE (0.0 s)
+        DIRECT: 562 of 2196 sweet (0.2559), exact binomial p = 0.522
+        MAS: 2208 of 8784 sweet (0.2514), exact binomial p = 0.767
+        BRIDGE: 2242 of 3600 sweet (0.6228; expected (900 x 0.25 + 900)/1800 = 0.625)
+[PASS] drivers: run_application.R (resumable, pipeline layout), run_exp2.R, run_exp1.R (95.9 s)
+        run_application.R: 104 records, rerun skipped
+        run_exp2.R: 8 rows (2 designs x 4 arms), rerun skipped
+        run_exp1.R: programme CLOSED, one session: 1/3 distinct; programme DIRECT, one session: 1/3 distinct; quickHaplo (R generator), one session: 1/2 distinct; runMacs (MaCS coalescent, compiled), one session: 2/2 distinct; quickHaplo (R generator), separate sessions: 1/2 distinct; runMacs (MaCS coalescent, compiled), separate sessions: 2/2 distinct
+
+13 tests, 13 passed, 0 failed, 2.6 min

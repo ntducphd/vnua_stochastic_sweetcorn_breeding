@@ -1,0 +1,8 @@
+"package","version","built"
+"R","4.5.1","R version 4.5.1 (2025-06-13 ucrt)"
+"AlphaSimR","2.1.0","R 4.5.3; x86_64-w64-mingw32; 2026-08-05 11:24:31 UTC; windows"
+"rrBLUP","4.6.3","R 4.5.2; ; 2025-11-01 00:36:37 UTC; windows"
+"jsonlite","2.0.0","R 4.5.0; x86_64-w64-mingw32; 2025-05-31 00:22:13 UTC; windows"
+"Rcpp","1.1.2","R 4.5.3; x86_64-w64-mingw32; 2026-07-28 13:37:14 UTC; windows"
+"RcppArmadillo","15.4.2.1","R 4.5.3; x86_64-w64-mingw32; 2026-07-28 14:29:56 UTC; windows"
+"R6","2.6.1","R 4.5.0; ; 2025-05-31 00:22:11 UTC; windows"

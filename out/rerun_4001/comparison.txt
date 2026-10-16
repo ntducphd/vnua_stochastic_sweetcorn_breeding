@@ -1,0 +1,3 @@
+count-matched controls         seed 4001: rerun  120 records, stored  120, identical field for field  120
+application                    seed 4001: rerun  200 records, stored  200, identical field for field  200
+ALL RECORDS IDENTICAL

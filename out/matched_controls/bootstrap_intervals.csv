@@ -1,0 +1,14 @@
+quantity,estimate,lo,hi,resamples
+exp2 gain factor DIRECT,1.947535,1.170382,3.170477,4000
+exp2 gain factor BRIDGE,2.229372,1.179920,4.317054,4000
+exp2 gain factor MAS,2.127880,1.337714,3.876987,4000
+application gain factor baseline DIRECT,0.793403,0.563957,2.221846,4000
+application gain factor baseline BRIDGE,1.374421,0.766930,4.942641,4000
+application gain factor baseline MAS,2.355627,1.192786,8.938191,4000
+application gain factor resource_matched DIRECT,1.642657,0.948803,5.464936,4000
+application gain factor resource_matched BRIDGE,3.009702,0.951475,16.173662,4000
+application gain factor resource_matched MAS,1.796794,1.045919,3.353601,4000
+table4 median relative sd estEndpoint,4.094647,1.305690,11.270779,4000
+table4 median relative sd estLateMean,2.827869,1.284040,8.858853,4000
+table4 median relative sd estSlope,3.932410,1.034383,10.480502,4000
+table4 ratio of medians slope/endpoint,0.960378,0.161452,4.884369,4000

@@ -1,0 +1,4 @@
+out_full/
+__pycache__/
+*.Rhistory
+.RData

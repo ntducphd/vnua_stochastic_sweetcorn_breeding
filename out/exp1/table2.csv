@@ -1,0 +1,9 @@
+"layer","calls","distinct","reproducible"
+"programme BRIDGE, one session",6,1,TRUE
+"programme CLOSED, one session",6,1,TRUE
+"programme DIRECT, one session",6,1,TRUE
+"programme MAS, one session",6,1,TRUE
+"quickHaplo (R generator), one session",5,1,TRUE
+"runMacs (MaCS coalescent, compiled), one session",5,5,FALSE
+"quickHaplo (R generator), separate sessions",3,1,TRUE
+"runMacs (MaCS coalescent, compiled), separate sessions",3,3,FALSE
