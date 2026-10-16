@@ -20,7 +20,7 @@
 ## Reads   out/exp2/pooled.csv, out/inference/exp2_robust.csv, out/matched_controls/bootstrap_intervals.csv,
 ##         out/inference/rw_by_cycle_contrast.csv, out/inference/rw_by_cycle.csv, out/inference/rw_contrasts.csv,
 ##         out/numbers.json (all written by R/06_inference.py or earlier scripts)
-## Writes  figures/R10_fig1_pairing.{png,pdf}, figures/R10_fig2_randomwalk.{png,pdf}
+## Writes  figures/R02_fig1_pairing.{png,pdf}, figures/R02_fig2_randomwalk.{png,pdf}
 ## Usage:  Rscript R/07_figures_1_2.R
 ################################################################################
 
@@ -103,7 +103,7 @@ forest <- function(l) {
          col = c("grey20", "grey30", adjustcolor("grey30", 0.55), "black"))
   letter(l)
 }
-both("figures/R10_fig1_pairing", FIG_W, 150, function() {
+both("figures/R02_fig1_pairing", FIG_W, 150, function() {
   layout(matrix(c(1, 2, 3, 4, 4, 4), 2, byrow = TRUE), heights = c(1, 1.25))
   par(mar = c(3.2, 4.2, 1.6, 0.8), mgp = c(2, 0.55, 0), las = 1, cex = 1)
   scatter("DIRECT", "a"); scatter("BRIDGE", "b"); scatter("MAS", "c")
@@ -196,7 +196,7 @@ panelMeans <- function(l) {
   title(ylab = expression(paste("Mean late slope (t ", ha^-1, " per cycle)")), line = 2.6)
   letter(l)
 }
-both("figures/R10_fig2_randomwalk", FIG_W, 135, function() {
+both("figures/R02_fig2_randomwalk", FIG_W, 135, function() {
   par(mfrow = c(2, 2), mar = c(3.4, 4.2, 1.6, 0.8), mgp = c(2, 0.55, 0), las = 1)
   par(cex = 1)
   panelVar("a"); panelInc("b")
@@ -206,5 +206,5 @@ both("figures/R10_fig2_randomwalk", FIG_W, 135, function() {
   panelMeans("d")
 })
 
-cat("wrote figures/R10_fig1_pairing.{png,pdf}, figures/R10_fig2_randomwalk.{png,pdf}\n")
+cat("wrote figures/R02_fig1_pairing.{png,pdf}, figures/R02_fig2_randomwalk.{png,pdf}\n")
 cat(R.version.string, "\n")

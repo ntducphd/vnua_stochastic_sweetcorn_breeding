@@ -1,7 +1,7 @@
 # sim/: breeding-programme simulation engine (clean-room rewrite)
 
 This folder holds a new, independent R implementation of the stochastic sweet corn breeding
-programme described in Section 2 of the manuscript (`internal/R10_stochastic_sweetcorn_workflow.md`):
+programme described in Section 2 of the manuscript (`internal/R02_stochastic_sweetcorn_workflow.md`):
 the founder object, the cycle operator of Algorithm 1, the five programmes and the count-matched
 controls, the four scenarios, and the drivers for the application and Experiments 1 and 2. It was
 written from the paper, `DATA_DICTIONARY.md` and the AlphaSimR/rrBLUP help pages only. It writes the
@@ -18,7 +18,7 @@ loading AlphaSimR and passes `nThreads = 1` to AlphaSimR.
 
 ## How to run
 
-All commands are run from `R10_stochastic_sweetcorn/`.
+All commands are run from the repository root.
 
 ```sh
 # tests (about 3 minutes; writes sim/tests/test_results.txt)

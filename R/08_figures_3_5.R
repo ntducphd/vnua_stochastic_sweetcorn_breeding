@@ -10,8 +10,8 @@
 ## Style: R/fig_style.R; each arm also has its own line type.
 ##
 ## Reads   out/application/pooled_records.csv, out/matched_controls/matched_contrasts.csv
-## Writes  figures/R10_fig3_baseline.{png,pdf}, figures/R10_fig4_resource_matched.{png,pdf},
-##         figures/R10_fig5_decomposition.{png,pdf}
+## Writes  figures/R02_fig3_baseline.{png,pdf}, figures/R02_fig4_resource_matched.{png,pdf},
+##         figures/R02_fig5_decomposition.{png,pdf}
 ## Usage:  Rscript R/08_figures_3_5.R
 ################################################################################
 
@@ -78,8 +78,8 @@ figure <- function(sc, stem) {
     panel(z, "accuracy", "Prediction accuracy, elite candidates", "d", ylim = c(0, 0.7))
   })
 }
-figure("baseline", "figures/R10_fig3_baseline")
-figure("resource_matched", "figures/R10_fig4_resource_matched")
+figure("baseline", "figures/R02_fig3_baseline")
+figure("resource_matched", "figures/R02_fig4_resource_matched")
 
 ## ---- Figure 5: the decomposition with count-matched controls ----------------
 KIND <- c("total: arm - CLOSED", "recycling: ELITE2M - CLOSED", "donor: arm - ELITE2M",
@@ -114,13 +114,13 @@ fig5 <- function(sc, l) {
   }
   letter(l)
 }
-both("figures/R10_fig5_decomposition", FIG_W, 92, function() {
+both("figures/R02_fig5_decomposition", FIG_W, 92, function() {
   par(mfrow = c(1, 2), mar = c(3.4, 8.8, 1.6, 4.2), mgp = c(2, 0.55, 0))
   par(cex = 1)
   fig5("baseline", "a")
   fig5("resource_matched", "b")
 })
 
-cat("wrote figures/R10_fig3_baseline, R10_fig4_resource_matched and",
-    "R10_fig5_decomposition (.png and .pdf)\n")
+cat("wrote figures/R02_fig3_baseline, R02_fig4_resource_matched and",
+    "R02_fig5_decomposition (.png and .pdf)\n")
 cat(R.version.string, "\n")

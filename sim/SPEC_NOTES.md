@@ -1,7 +1,7 @@
 # Implementation notes: where the paper is silent or ambiguous
 
 This engine (`sim/`) was written as a clean-room implementation from the manuscript
-(`internal/R10_stochastic_sweetcorn_workflow.md`, Sections 2.1–2.4, Table 1 and the Results),
+(`internal/R02_stochastic_sweetcorn_workflow.md`, Sections 2.1–2.4, Table 1 and the Results),
 `DATA_DICTIONARY.md`, the column names read by the downstream scripts, and the AlphaSimR 2.1.0 and
 rrBLUP 4.6.3 help pages. Each entry below quotes the text it interprets, states what the engine does,
 and, where it matters, what the authors may want to change in the Methods. Items marked **[check]**
