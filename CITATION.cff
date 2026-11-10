@@ -1,15 +1,38 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the article."
-title: "Stochastic sweet corn breeding: code and data"
+title: "Reproducibility and precision in stochastic breeding-program comparisons: code and data"
+version: 1.0.0
+date-released: 2026-11-11
 authors:
   - family-names: Nguyen
     given-names: Trung Duc
     orcid: "https://orcid.org/0000-0003-1225-2515"
+    affiliation: "Graduate School of Bioresource and Bioenvironmental Sciences, Kyushu University; Vietnam National University of Agriculture"
   - family-names: Nguyen
     given-names: Thi Hoai Linh
+    affiliation: "International Institute for Carbon-Neutral Energy Research, Kyushu University"
   - family-names: Ta
-    given-names: Viet Ton
+    given-names: Ton Viet
+    affiliation: "Faculty of Agriculture, Kyushu University"
+    email: tavietton@agr.kyushu-u.ac.jp
+  - family-names: Yasutake
+    given-names: Daisuke
+    affiliation: "Faculty of Agriculture, Kyushu University"
 license:
   - MIT
   - CC-BY-4.0
 repository-code: "https://github.com/ntducphd/vnua_stochastic_sweetcorn_breeding"
+preferred-citation:
+  type: article
+  title: "Reproducibility and precision in stochastic breeding-program comparisons: theory and a synthetic sweet corn application"
+  authors:
+    - family-names: Nguyen
+      given-names: Trung Duc
+      orcid: "https://orcid.org/0000-0003-1225-2515"
+    - family-names: Nguyen
+      given-names: Thi Hoai Linh
+    - family-names: Ta
+      given-names: Ton Viet
+    - family-names: Yasutake
+      given-names: Daisuke
+  status: submitted

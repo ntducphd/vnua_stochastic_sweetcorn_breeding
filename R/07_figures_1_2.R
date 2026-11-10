@@ -7,12 +7,12 @@
 ##   d    variance-reduction factor of pairing on a log scale: estimate with its F interval
 ##        and two-sample bootstrap interval, the paired-only estimate of equation (17), and
 ##        the application's paired-only factors with bootstrap intervals.
-## Figure 2: Proposition 2 tested on the seven distinct contrasts of the application.
+## Figure 2: Proposition 2.3 tested on the seven distinct contrasts of the application.
 ##   a    variance across replicates of the contrast D_t against the number of increments,
 ##        with the random-walk (linear) and random-drift (quadratic) fits
 ##   b    variance of the increments by cycle
 ##   c    drift-scale variance ratio of the late slope to the endpoint, with bootstrap
-##        intervals and the predictions of Proposition 2
+##        intervals and the predictions of Proposition 2.3
 ##   d    mean late slope per cycle against mean endpoint / 19 (constant drift: identity)
 ##
 ## Style: R/fig_style.R.

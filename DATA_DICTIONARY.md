@@ -12,12 +12,12 @@ One row per replicate, scenario, arm and cycle, written by `run_programme()` in 
 --pipeline-layout` runs one replicate (seed) per call, with all four scenarios in one run, and
 splits its records into `out/application/raw_w<seed>.csv` (CLOSED, ELITE2, DIRECT, BRIDGE and MAS:
 4 scenarios × 5 arms × 20 cycles = 400 rows) and `out/matched_controls/raw_m<seed>.csv` (the
-ELITE2M arms, run in the baseline and resource-matched scenarios only: 2 × 3 × 20 = 120 rows).
+ELITE2M arms, run in the baseline and plot-matched scenarios only: 2 × 3 × 20 = 120 rows).
 `R/01_pool_application.py` stacks the ten `raw_w<seed>.csv` files in seed order into
 `out/application/pooled_records.csv` (4,000 rows), and `R/04_analyse_matched_controls.R` stacks the
 `raw_m<seed>.csv` files into `out/matched_controls/pooled_records.csv` (1,200 rows).
 `out/rerun_4001/` holds the rerun of replicate 4001 from its saved founder object in a new R session
-(baseline and resource-matched scenarios) and `comparison.txt`, written by `scripts/compare_rerun.py`.
+(baseline and plot-matched scenarios) and `comparison.txt`, written by `scripts/compare_rerun.py`.
 
 The population columns (`meanG` to `pctSweet`, `gapCycle`, `nProgeny`) are measured at step 3 of
 Algorithm 1 on the unselected nursery of the cycle, **before** that cycle's selection and admission,
@@ -46,10 +46,10 @@ offered and admitted, and `plotsGrown` counts the plots of the same cycle.
 | `gapCycle` | elite nursery mean minus the frozen donor pool mean | t ha⁻¹ |
 | `nRedraw` | rejected draws of the QTL and marker sets before neither contained the endosperm locus (0 when the first draw was valid); founder-level | count |
 | `nF2screened`, `nSweetUsable` | F2 (and BRIDGE second-step) progeny or MAS seedlings screened, and sweet homozygotes among them | count |
-| `nProgeny` | progeny per cross of the elite nursery measured in the row: 15, except from cycle 2 on in the inflow arms and their ELITE2M controls under resource matching, where it is 10 (the cycle-1 nursery is common to every arm) | count |
+| `nProgeny` | progeny per cross of the elite nursery measured in the row: 15, except from cycle 2 on in the inflow arms and their ELITE2M controls under plot matching, where it is 10 (the cycle-1 nursery is common to every arm) | count |
 | `plotsGrown` | plots grown this cycle: plants of the elite nursery plus plants of that cycle's introgression nurseries (every F2 and second-step line under field discard, only sweet homozygotes under visual sorting, only sweet seedlings in MAS); F1 plants are not counted | count |
 | `strategy`, `scenario`, `visualSort`, `resourceMatch` | arm and scenario | |
-| `rep`, `seed` | replicate (seed − 4000) and its seed, which is both the founder seed and the programme seed of the replicate | |
+| `rep`, `seed` | replicate (seed − 4000) and its seed, which is both the founder seed and the program seed of the replicate | |
 | `RVersion`, `AlphaSimR`, `ompThreads` | software and thread count of the run (4.5.1, 2.1.0, 1) | |
 | `locusA`, `h2`, `nAdmit`, `nDonorCross` | parameters of the run: the additive effect of the sugar trait at the endosperm locus (5.82; recorded, not simulated), the heritability in the combined founder population (0.30), the admission cap κ (2) and the donor crosses per cycle (6) | |
 | `realisedGap`, `donorMean`, `baseMean`, `locusChr`, `maxFreqDiff`, `cullDonor` | founder-level quantities of the replicate: `baseMean`, mean of the cycle-1 elite nursery (after burn-in); `donorMean`, mean of the kept donor founders; `realisedGap` = `baseMean` − `donorMean`; `locusChr`, chromosome of the endosperm locus; `maxFreqDiff`, absolute difference in sweet-allele frequency between the pools at the locus; `cullDonor`, share of the simulated donor-pool individuals culled for not being homozygous non-sweet | t ha⁻¹ where applicable |
@@ -130,19 +130,19 @@ replicates.
 
 - `out/exp1/within_session.csv` (`sim/run_exp1.R`): `layer`, `rep` (call), `signature` (mean dosage |
   dosage sum of the first individual | number of sites for a genome; final gain | final genic variance
-  for a programme run, ten decimals), `note` (for the programme layers, whether the founder object was
+  for a program run, ten decimals), `note` (for the program layers, whether the founder object was
   in memory or recovered with `saveRDS`/`readRDS`).
 - `out/exp1/across_sessions.csv`: `session`, `pid` (process id of the R session), `layer`, `signature`,
   `AlphaSimR`, `R`.
 - `out/exp1/table2.csv`: Table 2, per layer `calls`, `distinct` (distinct signatures) and
   `reproducible`.
-- `out/exp1/founder_20260925.rds` and its `.sha256`: the founder object of the Experiment 1 programme
+- `out/exp1/founder_20260925.rds` and its `.sha256`: the founder object of the Experiment 1 program
   layers (founder seed 20260925; Table 1, Experiment 1 column). The `runMacs` and `quickHaplo` genomes of
   layers 1 and 2 are not saved.
 - `out/exp2/shard[0-3].csv` (`sim/run_exp2.R`): `design` (paired or unpaired), `seedBase`, `rep`,
   `arm`, `gain` (cumulative gain at cycle 10, t ha⁻¹), `genicPct` (genic variance at cycle 10, % of
   its post-burn-in value), `accLate` (mean accuracy over cycles 6 to 10) and `seed` (founder and
-  programme seed of the run: seedBase + rep for a paired replicate; seedBase + 100000 k + rep for arm
+  program seed of the run: seedBase + rep for a paired replicate; seedBase + 100000 k + rep for arm
   k = 1, 2, 3, 4 = CLOSED, DIRECT, BRIDGE, MAS of an unpaired replicate). The founder populations of
   Experiment 2 are not saved.
 - `out/exp2/pooled.csv` (`R/exp2_pool.py`): the four shards joined, with `uid` (= seedBase_rep) in
@@ -169,7 +169,7 @@ replicates.
   `recycling6`, and the descriptive `unmatched6` and `elite2m_vs_elite2_6`): mean, sd, t interval,
   t, raw, Bonferroni and sign-flip max-|t| p, both critical values, nominal and corrected
   equivalence bounds and minimum detectable effects.
-- `published_reanalysis.csv`: Section 3.5. Per combination of programme size (`crosses`),
+- `published_reanalysis.csv`: Section 3.5. Per combination of program size (`crosses`),
   `heritability`, `parameter` (`genetic_mean`, `genetic_variance`), pipeline (`program`) and
   genotype-by-environment interaction (`ge`) in Peixoto et al. (2024), with the ratios read in the
   order of their Table 3 (`ratio` in the input): the two ratios compared (`first`, `second`: on

@@ -904,8 +904,8 @@ holds("Section 3.3: slope factor below the constant-increment value, interval in
 holds("Section 3.3: observed-increment prediction inside the interval of the geometric mean",
       NJ["ratio_slope_gm_lo"]["value"] < NJ["rw_het"]["value"] < NJ["ratio_slope_gm_hi"]["value"])
 exact("Conclusions: slope factor, about 3.7", NJ["ratio_slope_gm"]["value"], 3.7, 1)
-exact("Conclusions: Proposition 2 with observed increment variances, 4.1", NJ["rw_het"]["value"], 4.1, 1)
-exact("Conclusions: Proposition 2 with constant increments, 4.9", NJ["rw_slope"]["value"], 4.9, 1)
+exact("Conclusions: Proposition 2.3 with observed increment variances, 4.1", NJ["rw_het"]["value"], 4.1, 1)
+exact("Conclusions: Proposition 2.3 with constant increments, 4.9", NJ["rw_slope"]["value"], 4.9, 1)
 eqb_ = [NJ["eqb_donor6_%s_%s" % (s_, a)]["value"] for s_ in ("b", "m") for a in ("DIRECT", "BRIDGE", "MAS")]
 eqbc_ = [NJ["eqbc_donor6_%s_%s" % (s_, a)]["value"] for s_ in ("b", "m") for a in ("DIRECT", "BRIDGE", "MAS")]
 holds("Table 7: all corrected and five of six nominal donor equivalence bounds exceed one cycle of gain",
@@ -913,9 +913,9 @@ holds("Table 7: all corrected and five of six nominal donor equivalence bounds e
       sum(x > NJ["one_cycle_gain"]["value"] for x in eqb_) == 5)
 holds("Section 3.4.5: both joint bounds exceed twice the closed programme's gain per cycle",
       min(max(eqb_), max(eqbc_)) > 2 * NJ["one_cycle_gain"]["value"])
-holds("Proposition 2 constant: 6K(w^2+1)/(5w(w^2-1)) = 4.94 for K = 19, w = 5",
+holds("Proposition 2.3 constant: 6K(w^2+1)/(5w(w^2-1)) = 4.94 for K = 19, w = 5",
       abs(NJ["rw_slope"]["value"] - 6 * 19 * 26 / (5 * 5 * 24)) < 1e-12)
-holds("Proposition 2 constant equals the relative-sd value squared (%.4f)" % (2.22 ** 2),
+holds("Proposition 2.3 constant equals the relative-sd value squared (%.4f)" % (2.22 ** 2),
       abs(NJ["rw_slope"]["value"] - NJ["rw_relsd_slope"]["value"] ** 2) < 1e-9)
 
 

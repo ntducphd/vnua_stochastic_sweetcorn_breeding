@@ -1,14 +1,10 @@
-# sim/: breeding-programme simulation engine (clean-room rewrite)
+# sim/: simulation engine
 
-This folder holds a new, independent R implementation of the stochastic sweet corn breeding
-programme described in Section 2 of the manuscript (`internal/R02_stochastic_sweetcorn_workflow.md`):
-the founder object, the cycle operator of Algorithm 1, the five programmes and the count-matched
-controls, the four scenarios, and the drivers for the application and Experiments 1 and 2. It was
-written from the paper, `DATA_DICTIONARY.md` and the AlphaSimR/rrBLUP help pages only. It writes the
-per-cycle records and the Experiment 1/2 tables in the layouts the existing analysis scripts read.
-
-Every implementation choice where the paper is silent or ambiguous is listed, with the sentence it
-interprets, in **[SPEC_NOTES.md](SPEC_NOTES.md)**. Read that file before aligning the Methods text.
+The R implementation of the sweet corn breeding programs of Section 2: the founder object, the cycle
+of Algorithm 1, the five programs and the count-matched controls, the four scenarios, and the drivers
+for the application and Experiments 1 and 2. It writes the per-cycle records and the Experiment 1 and
+2 tables read by the analysis scripts. Implementation choices are listed in
+[SPEC_NOTES.md](SPEC_NOTES.md).
 
 ## Requirements
 
@@ -53,15 +49,15 @@ Useful options of `run_application.R`:
 | `--cycles N` | shorten the run (timing only) |
 | `--force` | rerun a replicate whose CSV exists |
 
-A saved founder file **defines** its replicate: if `--founders <dir>/founder_<seed>.rds` exists it
-is reloaded (its seed, founder configuration and SHA-256 checksum are checked), otherwise it is built
-under `set.seed(seed)` and saved. Under AlphaSimR 2.1.0 `runMacs` does not reproduce from a seed, so
-keep the founder files with the outputs.
+A saved founder file defines its replicate: if `--founders <dir>/founder_<seed>.rds` exists, it is
+reloaded after its seed, founder configuration and SHA-256 checksum are checked; otherwise it is built
+under `set.seed(seed)` and saved. Under AlphaSimR 2.1.0, `runMacs` does not reproduce from a seed, so
+the founder files belong with the outputs.
 
 ### Outputs read by the analyses
 
 With `--pipeline-layout` the application driver writes, per seed, `raw_w<seed>.csv` (the five
-programmes in the four scenarios) and `raw_m<seed>.csv` (the count-matched controls). The deposit keeps
+programs in the four scenarios) and `raw_m<seed>.csv` (the count-matched controls). The deposit keeps
 them in `out/application/` and `out/matched_controls/`, where `R/01_pool_application.py` and
 `R/04_analyse_matched_controls.R` read them. Experiment 2 shards (`shard<k>.csv`, 80 rows each) are read
 by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (fields listed in SPEC_NOTES A10).
@@ -71,7 +67,7 @@ by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (field
 | File | Contents |
 |---|---|
 | `R/load.R` | `load_sim(simDir)`: one thread, packages, then the modules in order |
-| `R/config.R` | parameter sets `config_application()`, `config_exp1()`, `config_exp2()`, `config_test()`; `validate_config()`, `modify_config()`, resource-matching derivation, the scenario table |
+| `R/config.R` | parameter sets `config_application()`, `config_exp1()`, `config_exp2()`, `config_test()`; `validate_config()`, `modify_config()`, plot-matching derivation, the scenario table |
 | `R/utils.R` | seeding with an explicit generator kind, generator-state capture, logging, ranking, variance and correlation helpers, CLI parser |
 | `R/founders.R` | the founder object: coalescent draw, endosperm locus, cull, QTL/marker redraws, residual variance, t/ha scale, burn-in; save/reload with SHA-256 checksums |
 | `R/genetics.R` | locus dosage and marketability (equation 3), scale conversion, genic variance (equation 11), donor-allele content |
@@ -86,7 +82,7 @@ by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (field
 | `run_exp2.R` | driver: one Experiment 2 shard, paired and unpaired designs, resumable per block |
 | `tests/run_tests.R` | test suite (13 tests); `tests/rerun_in_new_session.R` is its helper |
 | `tests/test_results.txt` | output of the last test run |
-| `SPEC_NOTES.md` | implementation choices, with the paper text each interprets |
+| `SPEC_NOTES.md` | implementation choices |
 
 ## Outputs
 
@@ -96,14 +92,14 @@ by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (field
 | `raw_w<seed>.csv`, `raw_m<seed>.csv` | main arms (400) and ELITE2M arms (120) | same |
 | `timing_<seed>.tsv` | founder build or load, each run, total | time, seed, scenario, arm, seconds |
 | `founders/founder_<seed>.rds`, `.rds.sha256`, `SHA256SUMS` | one per replicate | founder object (SPEC_NOTES A13) |
-| `exp1/within_session.csv` | 2 × 5 genome calls + 4 × 6 programme calls | layer, rep, signature, note |
+| `exp1/within_session.csv` | 2 × 5 genome calls + 4 × 6 program calls | layer, rep, signature, note |
 | `exp1/across_sessions.csv` | 2 per session | session, pid, layer, signature, AlphaSimR, R |
 | `exp1/table2.csv` | one per layer | layer, calls, distinct, reproducible |
 | `exp2/shard<k>.csv` | 10 replicates × 2 designs × 4 arms = 80 | design, seedBase, rep, arm, gain, genicPct, accLate, seed |
 
 ## Design in brief
 
-* **State.** A programme state is the elite nursery (an AlphaSimR `Pop` with phenotypes drawn at
+* **State.** A program state is the elite nursery (an AlphaSimR `Pop` with phenotypes drawn at
   creation), the progeny per cross it was grown with, and the training archive.
 * **Cycle.** `run_cycle()` is one function for every arm. Its random draws come only from R's
   generator, in the order of Algorithm 1: training sample (step 1); donor and mate draws, crosses
@@ -112,10 +108,9 @@ by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (field
   size of the nursery it grows. CLOSED offers nothing; DIRECT, BRIDGE and MAS offer donor-derived
   sweet homozygotes and admit by the threshold and cap; ELITE2 and ELITE2M offer the elite nursery
   and admit the next-ranked candidates on a schedule (all twos for ELITE2, the inflow arm's
-  admissions for ELITE2M). Because ELITE2 is the elite control with a constant schedule, and the
-  mating pool is built the same way in every arm, ELITE2M reproduces CLOSED (all zeros) and ELITE2
-  (all twos) exactly.
-* **Pairing.** Every arm of a replicate starts from the same founder object and programme seed, so
+  admissions for ELITE2M). The mating pool is built the same way in every arm, so ELITE2M reproduces
+  CLOSED (all zeros) and ELITE2 (all twos) exactly.
+* **Pairing.** Every arm of a replicate starts from the same founder object and program seed, so
   arms share the first training sample and parents, and part at step 4 of cycle 1 (inflow arms) or
   at step 6 (elite controls). The test suite checks this on the generator state itself.
 * **Scale.** Genetic values stay on AlphaSimR's internal scale and are converted to t/ha only when a
@@ -123,7 +118,7 @@ by `R/exp2_pool.py`, and `R/03_founder_scale.R` reads the founder objects (field
 
 ## Compute
 
-Single-threaded on this laptop (R 4.5.1, reference BLAS):
+Single-threaded, R 4.5.1, reference BLAS:
 
 | Unit | Time |
 |---|---|

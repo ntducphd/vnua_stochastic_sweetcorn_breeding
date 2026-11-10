@@ -7,9 +7,9 @@ and 2, and out/numbers.json, which holds every number the paper quotes from thes
        variance-reduction factor of pairing with its F interval and a two-sample bootstrap
        interval, Brown-Forsythe test, normality and kurtosis of the contrasts, leave-one-out
        range, Fisher-z intervals for the correlations, and the lower bound on the share of
-       variance carried by the shared inputs that Proposition 1 gives.
+       variance carried by the shared inputs that Proposition 2.2 gives.
   B  Response statistics (out/application/per_run_summary.csv, out/application/pooled_records.csv)
-       Proposition 2 on the drift scale: Var(slope per cycle) / Var(endpoint / 19) and
+       Proposition 2.3 on the drift scale: Var(slope per cycle) / Var(endpoint / 19) and
        Var(late mean / 17) / Var(endpoint / 19) for the seven distinct contrasts, with
        bootstrap intervals and Pitman-Morgan tests; increment variances by cycle; the
        heteroscedastic and random-drift predictions; stability of the "largest in six of
@@ -159,7 +159,7 @@ put("rho_gain_min", min(r["rho"] for r in g), "%.2f")
 put("rho_gain_max", max(r["rho"] for r in g), "%.2f")
 put("rho_gain_lo_min", min(r["rho_lo"] for r in g), "%.2f")
 put("rho_gain_hi_max", max(r["rho_hi"] for r in g), "%.2f")
-# Proposition 1: rho <= sqrt(kappa_A kappa_C), so the geometric-mean share of variance carried
+# Proposition 2.2: rho <= sqrt(kappa_A kappa_C), so the geometric-mean share of variance carried
 # by the shared inputs is at least rho; the lower Fisher limit bounds it with 95% confidence.
 put("kappa_lb_min", min(r["rho"] for r in g), "%.2f")
 put("kappa_lb_max", max(r["rho"] for r in g), "%.2f")
@@ -178,14 +178,14 @@ for arm in ARMS:
     put("pooledmarg_gain_%s" % arm, (A.var(ddof=1) + C.var(ddof=1)) / dp.var(ddof=1), "%.2f")
 
 # =========================================================================================
-# B  Proposition 2: response statistics as estimators of the drift
+# B  Proposition 2.3: response statistics as estimators of the drift
 # =========================================================================================
 K, W, YRS = 19, 5, 3                      # increments to cycle 20, window, years per cycle
 
 
 def c_weights(K, w):
     """Coefficients of the OLS slope per step on the increments of a random walk observed at
-    steps 0..K, window = the last w points (proof of Proposition 2, Section 2.5)."""
+    steps 0..K, window = the last w points (proof of Proposition 2.3, Section 2.5)."""
     k = np.arange(K - w + 1, K + 1)
     kb, sxx = k.mean(), ((k - k.mean()) ** 2).sum()
     return np.array([sum(kk - kb for kk in k if kk >= j) / sxx for j in range(1, K + 1)])
